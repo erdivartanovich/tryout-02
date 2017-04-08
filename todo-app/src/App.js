@@ -6,9 +6,9 @@ import axios from 'axios';
 //title component
 const Title = ({todoCount}) => {
   return (
-    <div>
-      <h2>TODO LIST</h2>
-      <h3>You have {todoCount} Tasks Todo</h3>
+    <div className="page-header">
+      <h1>TODO LIST</h1>
+      <a href="#">You Have <span className="badge">{todoCount}</span> Tasks Todo</a> 
     </div>
   )
 };
@@ -19,23 +19,28 @@ const TodoForm = ({addTodo}) => {
   let input;
   // Return JSX
   return (
-    <form onSubmit={(e) => {
-        e.preventDefault();
-        addTodo(input.value);
-        input.value = '';
-      }}>
-      <input className="form-control" ref={node => {
-        input = node;
-      }} />
-      <br />
-    </form>
+    <div>
+      <div className="form-group" >
+        <input className="form-control text-center" placeholder="Add new task" ref={node => {
+          input = node;
+        }} />
+        <br />
+      </div>
+      <button type="submit" className="btn btn-default" onClick={(e) => {
+          e.preventDefault();
+          addTodo(input.value);
+          input.value = '';
+      }}>Add</button>
+    </div>
   );
 };
 
 //ToDoList Component
 const Todo = ({todo, remove}) => {
   // Each Todo
-  return (<a href="#" className="list-group-item" onClick={() => {remove(todo.id)}}>{todo.text}</a>);
+  return (
+    <a href="#" className="list-group-item" onClick={() => {remove(todo.id)}}>{todo.task}</a>
+  );
 }
 
 const TodoList = ({todos, remove}) => {
@@ -58,15 +63,20 @@ class App extends Component {
     this.backEndUrl = 'http://localhost:4000/'
   }
 
+  componentDidMount(){
+    // Get all data from backend
+    axios.get(this.backEndUrl)
+      .then((res) => {
+        // Set state with result
+        this.setState({data:res.data});
+        console.log(this.state.data);
+      });
+  }
+
   // Add todo handler
   addTodo(val){
     // Assemble data tobe added
     const todo = {task: val}
-
-    // console.log(todo);
-    // this.state.data.push(todo);
-    // this.setState({data: this.state.data});
-    // console.log(this.state.data);
 
     // add data
     axios.post(this.backEndUrl+'add/', todo,
@@ -82,21 +92,20 @@ class App extends Component {
           this.setState({data: this.state.data});
           console.log(this.state.data);
        });
-  }
+  };
 
   // Handle remove
   handleRemove(id){
     // Filter all todos except the one to be removed
-    const tersisa = this.state.data.filter((todo) => {
-      todo.id !== id;
+    const remainder = this.state.data.filter((todo) => {
+      if(todo.id !== id) return todo;
     });
-
-    //upadate state with filtered one
-    this.setState({data: tersisa});
-    return tersisa;
-  }
-
-
+    // Update state with filter
+    axios.delete(this.backEndUrl+id)
+      .then((res) => {
+        this.setState({data: remainder});      
+      })
+  };
 
   render() {
     return (
@@ -105,12 +114,20 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to TODO APP</h2>
         </div>
-        <Title todoCount={this.state.data.length}/>
-        <TodoForm addTodo={this.addTodo.bind(this)}/>
-        <TodoList 
-          todos={this.state.data} 
-          remove={this.handleRemove.bind(this)}
-        />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4"></div>
+            <div className="col-md-4">
+              <Title todoCount={this.state.data.length}/>
+              <TodoForm addTodo={this.addTodo.bind(this)}/>
+              <TodoList 
+                todos={this.state.data} 
+                remove={this.handleRemove.bind(this)}
+              />
+            </div>
+            <div className="col-md-4"></div>
+          </div>
+        </div>
       </div>
     );
   }

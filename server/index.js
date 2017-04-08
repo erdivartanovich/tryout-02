@@ -17,7 +17,13 @@ const database = [
 
 const addTask = (taskObj) => {
     //assign new id for new task
-    let idx = database.length + 1;
+    let maxID = 0;
+    database.forEach((item) => {
+        if (item.id > maxID) {
+            maxID = item.id;
+        }
+    })
+    let idx = maxID + 1;
     const toAdd = {id: idx, task: taskObj.task}
     database.push(toAdd);
     console.log('add operation success', toAdd);
@@ -34,9 +40,9 @@ const updateTask = (taskObj) => {
     return(database);
 }
 
-const deleteTask = (taskObj) => {
+const deleteTask = (id) => {
     database.forEach((task, index) => {
-        if (task.id  == taskObj.id) {
+        if (task.id  == id) {
             database.splice(index,1)
         }
     });
@@ -89,7 +95,7 @@ app.post('/add', function(req, res) {
 });
 
 // update operation routes
-app.get('/update', function(req, res) {
+app.post('/update', function(req, res) {
     const query = req.query;
     console.log("Client request to update existing task : /n" + JSON.stringify(query));
     const updatedResult = updateTask(query);
@@ -97,10 +103,10 @@ app.get('/update', function(req, res) {
 });
 
 // delete operation routes
-app.get('/delete', function(req, res) {
-    const query = req.query;
-    console.log("Client request to delete existing task : /n" + JSON.stringify(query));
-    const deletedResult = deleteTask(query);
+app.delete('/:id', function(req, res) {
+    const id = req.params.id;
+    console.log("Client request to delete existing task with id: " + id);
+    const deletedResult = deleteTask(id);
     res.send(deletedResult);
 });
 
