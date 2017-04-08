@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 //title component
 const Title = ({todoCount}) => {
@@ -59,12 +60,28 @@ class App extends Component {
 
   // Add todo handler
   addTodo(val){
-    // Assemble data
+    // Assemble data tobe added
     const todo = {task: val}
-    console.log(todo);
-    this.state.data.push(todo);
-    this.setState({data: this.state.data});
-    console.log(this.state.data);
+
+    // console.log(todo);
+    // this.state.data.push(todo);
+    // this.setState({data: this.state.data});
+    // console.log(this.state.data);
+
+    // add data
+    axios.post(this.backEndUrl+'add/', todo,
+       {
+         headers: {
+                'Content-Type': 'application/json',
+                'accept': 'application/json',
+            }
+
+       })
+       .then((res) => {
+          this.state.data.push(res.data);
+          this.setState({data: this.state.data});
+          console.log(this.state.data);
+       });
   }
 
   // Handle remove
