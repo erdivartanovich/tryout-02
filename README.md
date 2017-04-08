@@ -13,9 +13,9 @@ This application consists of two parts, todo-app and server. To run this applica
 <p>
 The server is written in nodejs environment. I used several library in this app:
 </p>
-- babel-cli and babel-preset-es2015 to enable javascript ES6 syntax
-- express-js as backend middleware to provide webAPI functionality
-- body-parser to handle cross origin issue
+1. babel-cli and babel-preset-es2015 to enable javascript ES6 syntax
+2. express-js as backend middleware to provide webAPI functionality
+3. body-parser to handle cross origin issue
 
 this is what the server app would looked like:
 <p style="text-align:center">
@@ -24,8 +24,8 @@ this is what the server app would looked like:
 
 **Client App**
 <p> The Client is written in reactjs libarary. I also used several library in this app: </p>
-- axios to profide http request functionality
-- bootstrap 3 for styling the app
+1. axios to profide http request functionality
+2. bootstrap 3 for styling the app
 
 this is what the client app would looked like:
 
