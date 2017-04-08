@@ -9,7 +9,7 @@ by : **Erdiansyah**
 
 This application consists of two parts, todo-app and server. To run this application, follow instructions below.
 
-####Server
+#### Server
 
 The server is written in nodejs environment. I used several library in this app:
 
@@ -22,7 +22,7 @@ this is what the server app would looked like:
     <img src="reactjs-server.jpg" width="500"  />
 </p> 
 
-###Client App
+#### Client App
 
 The Client is written in reactjs libarary. I also used several library in this app:
 
