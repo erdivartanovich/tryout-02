@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "todo app backend with express and nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node index.js --presets es2015"
+  },
+  "keywords": [
+    "express",
+    "todo"
+  ],
+  "author": "erdiansyah",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2",
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
