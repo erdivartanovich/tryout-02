@@ -25,6 +25,7 @@ this is what the server app would looked like:
 **Client App**
 <p> The Client is written in reactjs libarary. I also used several library in this app: </p>
 - axios to profide http request functionality
+- bootstrap 3 for styling the app
 
 this is what the client app would looked like:
 

@@ -17,5 +17,7 @@ yarn-error.log*
 
 /reactjs/server/node_modules
 /reactjs/todo-app/node_modules
+/native-modules/RNSpeechTodo/node_modules
+/native-modules/RNSpeechTodo/build
 
 
