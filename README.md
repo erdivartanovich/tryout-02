@@ -26,10 +26,10 @@ this is what the server app would looked like:
 
 The Client is written in reactjs libarary. I also used several library in this app:
 
-1. axios to profide http request functionality
+1. axios to provide http request functionality
 2. bootstrap 3 for styling the app
 
-this is what the client app would looked like:
+This is what the client app would looked like:
 
 <p style="text-align:center">
     <img src="reactjs-client.jpg" width="500"  />
@@ -47,7 +47,7 @@ this is what the client app would looked like:
 3. Run the server using `npm start`
 
 **Client**
-1. access the client directory by using `cd ./reactjs/todo-app`
+1. Access the client directory by using `cd ./reactjs/todo-app`
 2. If this is your first time run, execute `yarn install`
 3. Run the client by run `yarn start` it will open new browser to display the app
 4. To add new task you can type the task description in the input box
